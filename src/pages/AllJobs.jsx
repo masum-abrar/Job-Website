@@ -1,36 +1,39 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { SingleJob } from './SingleJob';
-import SearchIcon from '@material-ui/icons/Search';
 
 export const AllJobs = () => {
   const jobs = useLoaderData();
   const [searchQuery, setSearchQuery] = useState('');
-
-  const filteredJobs = jobs.filter(job =>
-    job.jobTitle.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const [searchResults, setSearchResults] = useState(jobs);
 
   const handleSearchChange = event => {
     setSearchQuery(event.target.value);
   };
 
+  const handleSearchClick = () => {
+    const filteredJobs = jobs.filter(job =>
+      job.jobTitle.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setSearchResults(filteredJobs);
+  };
+
   return (
     <div className="">
       <div className="flex justify-center mt-4">
-        <div className="flex items-center border rounded-md px-2">
-          <SearchIcon />
-          <input
-            type="text"
-            placeholder="Search by job title"
-            className="border-none outline-none ml-2"
-            value={searchQuery}
-            onChange={handleSearchChange}
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Search by job title"
+          className="border p-2 rounded-md"
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+        <button className="btn ml-2" onClick={handleSearchClick}>
+          Search
+        </button>
       </div>
       <div className="flex flex-wrap gap-3 justify-center mt-4">
-        {filteredJobs.map(job => (
+        {searchResults.map(job => (
           <SingleJob key={job._id} job={job}></SingleJob>
         ))}
       </div>
