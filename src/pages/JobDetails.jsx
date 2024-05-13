@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useLoaderData } from 'react-router-dom'
+import { AuthContext } from '../providers/AuthProviders';
 import pic2 from '../assets/pic2.png';
 export const JobDetails = () => {
+    const { user} = useContext(AuthContext) ;
     const jobs = useLoaderData()
     console.log(jobs)
+    
     const {
         _id,
         jobTitle,
@@ -56,8 +59,34 @@ export const JobDetails = () => {
             </div>
            
         </div>
-        <button className="btn flex items-center w-full bg-lime-400"> APPLY JOB</button>
+        <div>
+                        <label htmlFor="my_modal_7" className="btn w-full bg-lime-400">Apply Now</label>
+                    </div>
     </div>
+    <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+    <div className="modal" role="dialog">
+                <div className="modal-box">
+                    <form >
+                        <h3 className="text-xl font-bold"></h3>
+                        <p><span className="font-bold"> </span>Name : {Name}</p>
+                        
+                       <p><span className="font-bold"> </span>Email:  {user?.email}</p>
+                        <textarea className="border-2 border-black px-2 w-96" name="additional_notes" defaultValue="" />
+
+                       
+                        <hr />
+                        {/* <div className="">
+                            <p><span className="font-bold">Donator Name: </span>{donator_name}</p>
+                            <p><span className="font-bold">Donator Email: </span>{donator_email}</p>
+                        </div> */}
+                       
+                        <div>
+                            <button  className="btn btn-sm btn-success text-white">Apply</button>
+                        </div>
+                    </form>
+                </div>
+                <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
+            </div>
 </div>
   )
 }
