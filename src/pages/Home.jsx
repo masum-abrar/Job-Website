@@ -5,6 +5,7 @@ import { TabCategories } from '../components/TabCategories'
 import { useLoaderData } from 'react-router-dom'
 import { AllJobs } from './AllJobs'
 import { Test } from './Test'
+import { NewSection } from '../components/NewSection'
 
 export const Home = () => {
   const jobs = useLoaderData()
@@ -35,7 +36,8 @@ console.log(theme)
 
 <Banner></Banner>
 <TabCategories jobs={jobs}></TabCategories>
-<Test></Test>
+{/* <Test></Test> */}
+<NewSection></NewSection>
     </div>
   )
 }
