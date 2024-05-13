@@ -68,10 +68,10 @@ export const JobDetails = () => {
                 <div className="modal-box">
                     <form >
                         <h3 className="text-xl font-bold"></h3>
-                        <p><span className="font-bold"> </span>Name : {Name}</p>
+                        <p className='text-center mb-4'><span className="font-bold"> </span>Name : {Name}</p>
                         
-                       <p><span className="font-bold"> </span>Email:  {user?.email}</p>
-                        <textarea className="border-2 border-black px-2 w-96" name="additional_notes" defaultValue="" />
+                       <p className='text-center m-4'><span className="font-bold "> </span>Email:  {user?.email}</p>
+                        <textarea className="border-2 border-black px-2 w-96 ml-10" name="additional_notes" defaultValue="Drop Your CV..." />
 
                        
                         <hr />
@@ -81,7 +81,7 @@ export const JobDetails = () => {
                         </div> */}
                        
                         <div>
-                            <button  className="btn btn-sm btn-success text-white">Apply</button>
+                            <button  className="btn btn-sm btn-success text-white ml-[43%]">Apply</button>
                         </div>
                     </form>
                 </div>
