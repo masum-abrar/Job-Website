@@ -32,11 +32,11 @@ export const MyJobs = () => {
                                     <input type="checkbox" className="checkbox" />
                                 </label>
                             </th>
-                            <th>Image</th>
-                            <th>Service</th>
+                            <th>Job Title</th>
+                            <th>Categories</th>
                             <th>Date</th>
                             <th>Price</th>
-                            <th>Status</th>
+                            
                         </tr>
                     </thead>
                     <tbody>

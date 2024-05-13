@@ -4,12 +4,12 @@ export const JobTable = ({job}) => {
       const {
         _id,
         jobTitle,
-        description,
-       
-        Application_Deadline,
-        Salary_Range,
-        Name_who_posted_the_job,
-        jobPostingDate
+        jobPostingDate,
+       Name,
+        applicationDeadline,
+        salaryRange,
+        jobCategory,
+        jobApplicantsNumber
        
       } = job || {}
   return (
@@ -20,17 +20,15 @@ export const JobTable = ({job}) => {
         </button> */}
     </th>
     <td>
-        <div className="avatar">
-            {/* <div className="rounded w-24 h-24">
-                {img && <img src={img} alt="Avatar Tailwind CSS Component" />}
-            </div> */}
-        </div>
+        
+            {jobTitle}
+       
     </td>
     <td>
-        { jobTitle}
+        {  jobCategory}
     </td>
     <td>{ jobPostingDate}</td>
-    {/* <td>${price}</td> */}
+    <td>{salaryRange}</td>
     {/* <th>
         {
             status === 'confirm' ? <span className="font-bold text-primary">Confirmed</span> :
