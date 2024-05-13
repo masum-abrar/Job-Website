@@ -34,6 +34,19 @@ const { user, logOut } = useContext(AuthContext) ;
         localStorage.setItem('theme', newTheme);
     };
   console.log(theme)
+  const navItem = <>
+    <NavLink to='/' className={({isActive})=> isActive? ' text-rose-600  font-bold   ' : 'font-bold'}>
+           Home
+            </NavLink>
+              <NavLink to='/alljobs' className={({isActive})=> isActive? ' text-rose-600   font-bold' : 'font-bold'}>
+              All Jobs
+              </NavLink>
+         
+
+            <NavLink to='/blogs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
+             Bolgs
+            </NavLink>
+  </>
   return (
     <div className={`navbar  `}>
 
@@ -64,13 +77,15 @@ const { user, logOut } = useContext(AuthContext) ;
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-10 text-black">
-          <NavLink to='/' className={({isActive})=> isActive? ' text-rose-600  font-bold   ' : 'font-bold'}>
-           Home
+          {navItem}
+           
+            
+       {
+          user && <>
+        <NavLink to='/userprofile' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
+             User Profile
             </NavLink>
-              <NavLink to='/alljobs' className={({isActive})=> isActive? ' text-rose-600   font-bold' : 'font-bold'}>
-              All Jobs
-              </NavLink>
-              <NavLink to='/appliedjobs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
+                 <NavLink to='/appliedjobs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
               Applied Jobs
             </NavLink>
             <NavLink to='/addjobs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
@@ -79,12 +94,9 @@ const { user, logOut } = useContext(AuthContext) ;
             <NavLink to='/myjobs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
              My Jobs
             </NavLink>
-            <NavLink to='/blogs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
-             Bolgs
-            </NavLink>
-            <NavLink to='/userprofile' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
-             User Profile
-            </NavLink>
+            </>
+       }
+           
             {user?.email}
             <p></p>
      
