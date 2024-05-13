@@ -23,6 +23,7 @@ export const AddJobs = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
+    const Name=form.name.value;
    const pictureURL=form.pictureURL.value;
    const jobTitle=form.jobTitle.value;
    const jobCategory=form.jobCategory.value;
@@ -33,7 +34,7 @@ export const AddJobs = () => {
    const jobApplicantsNumber=form.jobApplicantsNumber.value;
    const email = user?.email;
 
-   const newJob ={ email, pictureURL, jobTitle, jobCategory,salaryRange,jobDescription,jobPostingDate,applicationDeadline,jobApplicantsNumber}
+   const newJob ={ email, pictureURL, jobTitle, jobCategory,salaryRange,jobDescription,jobPostingDate,applicationDeadline,jobApplicantsNumber,Name}
 console.log(newJob)
    axios.post("http://localhost:5000/jobs", newJob)
    .then(res => {
@@ -55,6 +56,15 @@ console.log(newJob)
     <div className="max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Add A Job</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
+      <div>
+          <label className="block mb-1">Name:</label>
+          <input
+            type="text"
+            name="name"
+          
+            className="w-full border border-gray-300 rounded px-4 py-2"
+          />
+        </div>
         <div>
           <label className="block mb-1">Picture URL of the Job Banner:</label>
           <input

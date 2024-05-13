@@ -20,10 +20,10 @@ export const TabCategories = ({ jobs }) => {
                     </p>
                     <div className='flex items-center justify-center'>
                         <TabList>
-                            <Tab>Software Engineer</Tab>
-                            <Tab>Marketing Manager</Tab>
-                            <Tab>Graphic Designer</Tab>
-                            <Tab>Data Analyst</Tab>
+                            <Tab>On-Site Job</Tab>
+                            <Tab>Remote Job</Tab>
+                            <Tab>Hybrid</Tab>
+                            <Tab>Part-Time</Tab>
                         </TabList>
                     </div>
 
@@ -32,7 +32,7 @@ export const TabCategories = ({ jobs }) => {
               <TabPanel>
                  <div className='flex gap-3 justify-center'>
                  {jobs
-              .filter(j => j.Job_Title === "Senior Software Engineer")
+              .filter(j => j.jobCategory === "On Site")
               .map(job => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -43,7 +43,7 @@ export const TabCategories = ({ jobs }) => {
                     <TabPanel>
                <div  className='flex gap-3 justify-center'>
                {jobs
-              .filter(j => j.Job_Title === "Marketing Manager")
+              .filter(j => j.jobCategory === "Remote")
               .map(job => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -52,7 +52,7 @@ export const TabCategories = ({ jobs }) => {
                     <TabPanel>
                 <div className='flex gap-3 justify-center'>
                 {jobs
-              .filter(j => j.Job_Title === "Graphic Designer")
+              .filter(j => j.jobCategory=== "Hybrid")
               .map(job => (
                 <JobCard key={job._id} job={job} />
               ))}
@@ -61,7 +61,7 @@ export const TabCategories = ({ jobs }) => {
                     <TabPanel>
                <div className='flex gap-3 justify-center'>
                {jobs
-              .filter(j => j.Job_Title === "Data Analyst")
+              .filter(j =>j.jobCategory === "Part-Time")
               .map(job => (
                 <JobCard key={job._id} job={job} />
               ))}

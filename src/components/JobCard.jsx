@@ -6,13 +6,14 @@ export const JobCard = ({job}) => {
 
 
     const {
-        _id,
-        Job_Title,
-        description,
-       
-        Application_Deadline,
-        Salary_Range,
-        Name_who_posted_the_job
+      _id,
+        jobTitle,
+        jobPostingDate,
+       Name,
+        applicationDeadline,
+        salaryRange,
+        jobCategory,
+        jobApplicantsNumber
        
       } = job || {}
   return (
@@ -45,11 +46,20 @@ export const JobCard = ({job}) => {
     // </Link>
     <div className="card w-96 bg-primary text-primary-content ">
   <div className="card-body">
-    <h2 className="card-title"> Deadline: {new Date(Application_Deadline).toLocaleDateString()}</h2>
-    <div className="badge badge-secondary p-3 bg-rose-600">{Job_Title}</div>
-    <p>{Name_who_posted_the_job}</p>
+    <h1 className="badge badge-secondary p-4 bg-rose-600 absolute bottom-[296px] left-[303px]">{jobCategory}
+    
+    </h1>
+    <h2 className="card-title"> Deadline: {new Date(applicationDeadline).toLocaleDateString()}</h2>
+    
+    <h2 className="card-title"> PostingDate: {new Date( jobPostingDate).toLocaleDateString()}</h2>
+    
+    <p>{ Name}</p>
+    <div className="badge badge-secondary p-4 bg-rose-600 ">{jobTitle}</div>
     <p className='mt-2 text-sm font-bold  '>
-           Range: {Salary_Range}
+           Range: {salaryRange}
+        </p>
+        <p className='mt-2 text-sm font-bold  '>
+        ApplicantsNumber: {jobApplicantsNumber}
         </p>
     <div className="card-actions justify-center">
      <Link to={`/details/${_id}`}> <button className="btn "> VIEW DETAILS</button></Link>

@@ -3,7 +3,7 @@ import React from 'react'
 export const JobTable = ({job}) => {
       const {
         _id,
-        Job_Title,
+        jobTitle,
         description,
        
         Application_Deadline,
@@ -27,7 +27,7 @@ export const JobTable = ({job}) => {
         </div>
     </td>
     <td>
-        {Job_Title}
+        { jobTitle}
     </td>
     <td>{ jobPostingDate}</td>
     {/* <td>${price}</td> */}
