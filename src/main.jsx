@@ -24,6 +24,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { Update } from './pages/Update.jsx';
+import { Error } from './pages/Error.jsx';
 
 const queryClient = new QueryClient();
 
@@ -91,6 +92,11 @@ const router = createBrowserRouter([
         loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`),
       
       
+      },
+      {
+        path : "*",
+        element : <Error></Error>
+   
       },
       
     ]
