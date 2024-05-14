@@ -25,6 +25,7 @@ import {
 } from '@tanstack/react-query'
 import { Update } from './pages/Update.jsx';
 import { Error } from './pages/Error.jsx';
+import PrivateRoute from './routers/PrivateRoute.jsx';
 
 const queryClient = new QueryClient();
 
@@ -51,7 +52,7 @@ const router = createBrowserRouter([
       },
       {
         path : "/alljobs",
-        element : <AllJobs></AllJobs>,
+        element : <PrivateRoute> <AllJobs></AllJobs></PrivateRoute>,
         loader : () => fetch(`http://localhost:5000/jobs`),
    
       },
