@@ -7,10 +7,29 @@ import { AllJobs } from './AllJobs'
 import { Test } from './Test'
 import { NewSection } from '../components/NewSection'
 import { HowitWork } from '../components/HowitWork'
+//import { useQuery } from "@tanstack/react-query";
 
 export const Home = () => {
   const jobs = useLoaderData()
   console.log(jobs)
+
+  // const { isPending, isError, error, data: foods } = useQuery({
+  //       queryKey: ['foods'],
+  //       queryFn: async () => {
+  //           const res = await fetch('http://localhost:8000/foods');
+  //           return res.json();
+  //       }
+  //   })
+  //   console.log(foods);
+
+
+  //   if (isPending) {
+  //       return <span className="loading loading-spinner text-primary"></span>
+  //   }
+
+  //   if (isError) {
+  //       return <p>{error.message}</p>
+  //   }
 
   const [theme, setTheme] = useState(() => {
     

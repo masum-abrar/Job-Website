@@ -6,7 +6,7 @@ export const HowitWork = () => {
   return (
 <div>
   <div>
-    <h1 className='font-bold text-black text-center mt-20 mb-12'>How It Works?</h1>
+    <h1 className='font-bold text-black text-center mt-20 mb-12 text-2xl'>How It Works?</h1>
   </div>
 <div className='flex gap-16 max-w-[900px] mx-auto text-center '>
         <div className=' flex-row  '>
