@@ -44,7 +44,8 @@ export const JobDetails = () => {
         const email = user?.email
         const applydata = { jobs, email}
         console.log(applydata);
-   {currentDatestring >= applicationDeadline ?   
+        console.log(applicationDeadline)
+   {currentDate <= applicationDeadline ?   
         axios.post('http://localhost:5000/applyjob', applydata)
      .then(res => {
             const data = res.data;

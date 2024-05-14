@@ -2,6 +2,7 @@ import React, { useContext, useState ,useEffect } from 'react'
 import { AuthContext } from '../providers/AuthProviders';
 import axios from 'axios';
 import { JobTable } from './JobTable';
+import Swal from 'sweetalert2';
 
 export const MyJobs = () => {
   const { user } = useContext(AuthContext);
@@ -19,27 +20,38 @@ export const MyJobs = () => {
       //     .then(data => setBookings(data))
   }, [url]);
 
+
   const handleDelete = id => {
-    const proceed = confirm('Are You sure you want to delete');
-    if (proceed) {
-        fetch(`http://localhost:5000/bookings/${id}`, {
-            method: 'DELETE'
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.deletedCount > 0) {
-                    alert('deleted successful');
-                    const remaining = bookings.filter(booking => booking._id !== id);
-                    setBookings(remaining);
-                }
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`http://localhost:5000/jobs/${id}`, {
+                method: 'DELETE'
             })
-    }
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.deletedCount > 0) {
+                        Swal.fire(
+                            "Deleted!",
+                            "job has been deleted.",
+                            "success"
+                        );
+                        const remaining = jobs.filter(added => added._id !== id);
+                        setJobs(remaining);
+                    }
+                })
+        }
+    })
 }
 
-const handleUpdate = id => {
-
-}
 
   return (
     <div>
@@ -62,7 +74,6 @@ const handleUpdate = id => {
                             jobs.map(job => <JobTable  key={jobs._id}
                               job={job}
                               handleDelete={handleDelete}
-                              handleUpdate={handleUpdate}
                               >
                               </JobTable>)
                         }

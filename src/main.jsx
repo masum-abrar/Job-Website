@@ -23,6 +23,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
+import { Update } from './pages/Update.jsx';
 
 const queryClient = new QueryClient();
 
@@ -82,6 +83,13 @@ const router = createBrowserRouter([
         path: "/details/:id",
         element: <JobDetails></JobDetails>,
          loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`),
+      
+      },
+      {
+        path: "/updatejob/:id",
+        element: <Update></Update>,
+        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`),
+      
       
       },
       

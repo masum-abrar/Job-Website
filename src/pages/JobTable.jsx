@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
-export const JobTable = ({job, handleDelete, handleUpdate }) => {
+export const JobTable = ({job, handleDelete }) => {
       const {
         _id,
         jobTitle,
@@ -25,7 +26,8 @@ export const JobTable = ({job, handleDelete, handleUpdate }) => {
     <td>{ jobPostingDate}</td>
     <td>{salaryRange}</td>
     <td>
-        <button onClick={() => handleUpdate(_id)} className="btn btn-sm">Update</button>
+        <Link to={`/updatejob/${_id}`}> <button className="btn btn-sm">Update</button></Link>
+       
     </td>
     <th>
         <button onClick={() => handleDelete(_id)} className="btn btn-sm btn-circle">
