@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { AuthContext } from '../providers/AuthProviders';
 import { Tooltip } from 'react-tooltip';
 import { IoPersonOutline } from "react-icons/io5";
+import logo from '../assets/logo.png';
 
 
 export const Navbar = () => {
@@ -72,7 +73,9 @@ const { user, logOut } = useContext(AuthContext) ;
        
       
             </ul>
+            <img src={logo} className='h-[70px] w-[70px]'  alt="" />
           </div>
+        
           <a className="btn btn-ghost text-xl"> JOBI</a>
         </div>
         <div className="navbar-center hidden lg:flex">
