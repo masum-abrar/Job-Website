@@ -151,10 +151,10 @@ export const Login = () => {
     
   return (
    <div>
-     <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-6 mb-6 md:ml-[20%] lg:ml-[35%] relative top-24 bottom-20">
+     <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-6 mb-6 md:ml-[20%] lg:ml-[35%]  ">
         <Helmet>
             <title>
-                Real State | SignIn
+                JOBI | LOGIN
             </title>
         </Helmet>
     <form onSubmit={handleLogIn} className="card-body ">
@@ -180,9 +180,7 @@ export const Login = () => {
       <div className="form-control mt-6">
         <button onClick={HandleGoogleSignIn} className="btn bg-red-600 text-white">Google Login</button>
       </div>
-      <div className="form-control mt-6">
-        <button onClick={HandleGithubSignIn} className="btn bg-black text-white">Github Login</button>
-      </div>
+     
     </form>
    
  <div>

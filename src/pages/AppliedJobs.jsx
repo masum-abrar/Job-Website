@@ -2,6 +2,7 @@ import React, { useContext, useState ,useEffect } from 'react'
 import { AuthContext } from '../providers/AuthProviders';
 import axios from 'axios';
 import { AppliedTable } from './AppliedTable';
+import { Helmet } from 'react-helmet-async';
 
 export const AppliedJobs = () => {
   const { user } = useContext(AuthContext);
@@ -22,6 +23,11 @@ export const AppliedJobs = () => {
   return (
     <div>
             <h2 className="text-5xl">Your bookings: {jobs.length}</h2>
+            <Helmet>
+        <title> JOBI | APPLIED JOB</title>
+       
+      </Helmet>
+      
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     {/* head */}

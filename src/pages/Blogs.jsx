@@ -1,9 +1,15 @@
 import React from 'react';
 import pic from '../assets/pic.jpg';
 import pic4 from '../assets/node.png';
+import { Helmet } from 'react-helmet-async';
 export const Blogs = () => {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
+       <Helmet>
+        <title> JOBI | BLOG</title>
+       
+      </Helmet>
+   
       <section className="mb-8">
         <div className="flex flex-col md:flex-row items-center">
           <div className="md:w-1/3 mb-4 md:mb-0">

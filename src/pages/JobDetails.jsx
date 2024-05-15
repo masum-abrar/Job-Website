@@ -4,6 +4,7 @@ import { AuthContext } from '../providers/AuthProviders';
 import pic2 from '../assets/pic2.png';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 
 function getDate() {
@@ -141,6 +142,11 @@ const handleapplyjob = () => {
     
 //   </div>
 <div className="max-w-2xl overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 ml-[25%] mt-10">
+<Helmet>
+        <title> JOBI | ADD JOB</title>
+       
+      </Helmet>
+     
     <img className="object-cover w-full h-64" src={pictureURL} alt="Article"/>
 
     <div className="p-6">

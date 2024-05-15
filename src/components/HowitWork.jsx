@@ -8,20 +8,20 @@ export const HowitWork = () => {
   <div>
     <h1 className='font-bold text-black text-center mt-20 mb-12 text-2xl'>How It Works?</h1>
   </div>
-<div className='flex gap-16 max-w-[900px] mx-auto text-center '>
+<div className='flex-row lg:flex gap-16 max-w-[900px] mx-auto text-center '>
         <div className=' flex-row  '>
-<img src={account} className='h-[50px] w-[50px] items-center ml-24' alt="" />
+<img src={account} className='h-[50px] w-[50px] items-center lg:ml-24 sm:ml-96' alt="" />
 <h1>Register an Account</h1>
 <p> Post a job tell us about your project</p>
         </div>
         <div>
-        <img src={search} className='h-[50px] w-[50px] ml-24' alt="" />
-<h1>Register an Account</h1>
-<p> Post a job tell us about your project</p>
+        <img src={search} className='h-[50px] w-[50px] lg:ml-28 sm:ml-96' alt="" />
+<h1>Find a job</h1>
+<p>  many kind of job available in many categories</p>
         </div>
         <div>
-        <img src={apply} className='h-[50px] w-[50px] ml-24' alt="" />
-<h1>Register an Account</h1>
+        <img src={apply} className='h-[50px] w-[50px] lg:ml-24 sm:ml-96' alt="" />
+<h1>Post for a job</h1>
 <p> Post a job tell us about your project</p>        
         </div>
     </div>

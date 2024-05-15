@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet-async';
 import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -50,6 +51,11 @@ export const Update = () => {
 
   return (
     <div className="max-w-xl mx-auto">
+       <Helmet>
+        <title> JOBI | UPDATE</title>
+       
+      </Helmet>
+     
       <h1 className="text-2xl font-bold mb-4 text-center">Update the Job</h1>
       <form onSubmit={handleUpdate} className="space-y-4">
       <div>

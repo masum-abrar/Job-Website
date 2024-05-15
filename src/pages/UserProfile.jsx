@@ -1,10 +1,16 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../providers/AuthProviders';
+import { Helmet } from 'react-helmet-async';
 
 export const UserProfile = () => {
   const { user } = useContext(AuthContext) ;
   return (
     <div>
+       <Helmet>
+        <title> JOBI | USER PROFILE</title>
+       
+      </Helmet>
+      
       <div className="max-w-md p-8 sm:flex sm:space-x-6 bg-gray-900 dark:bg-gray-50 text-gray-100 dark:text-gray-800 ml-[32%] mt-[100px]">
 	<div className="flex-shrink-0 w-full mb-6 h-44 sm:h-32 sm:w-32 sm:mb-0">
 		<img src={user.photoURL} alt="" className="object-cover object-center w-full h-full rounded bg-gray-500 dark:bg-gray-500" />

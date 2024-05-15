@@ -47,10 +47,11 @@ export const Register = () => {
   return (
    
     <div>
-      <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-6 mb-6 lg:ml-[35%] relative top-24 mb-24">
+      <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-6 mb-6 lg:ml-[35%] relative ">
          <Helmet>
-            <title>Real State | SignUp</title>
+            <title>JOBI | SignUp</title>
          </Helmet>
+         
     <form onSubmit={handleRegister} className="card-body">
     <div className="form-control">
         <label className="label">

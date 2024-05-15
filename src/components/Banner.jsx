@@ -5,10 +5,10 @@ import pic2 from '../assets/pic2.png';
 export const Banner = () => {
   return (
     <div className='box'>
-<div className='flex items-center justify-around'>
+<div className='flex-row sm:gap-4 lg:flex items-center justify-around'>
 
-<div className='text-white'>
-  <h1 className='font-bold text-2xl'>
+<div className='text-white '>
+  <h1 className='font-bold text-2xl '>
 Drop Resume and Get Your <br />
 Your Desire job
   </h1>

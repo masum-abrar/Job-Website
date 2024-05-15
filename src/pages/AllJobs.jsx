@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { SingleJob } from './SingleJob';
+import { Helmet } from 'react-helmet-async';
 
 export const AllJobs = () => {
   const jobs = useLoaderData();
@@ -20,6 +21,11 @@ export const AllJobs = () => {
 
   return (
     <div className="">
+       <Helmet>
+        <title> JOBI | ALL JOB</title>
+       
+      </Helmet>
+      
       <div className="flex justify-center mt-4">
         <input
           type="text"

@@ -38,7 +38,7 @@ const router = createBrowserRouter([
       {
         path : "/",
         element : <Home></Home>,
-      //  loader : () => fetch(`https://job-server-site.vercel.app`),
+      //  loader : () => fetch(`http://localhost:5000`),
    
       },
       {

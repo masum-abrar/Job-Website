@@ -3,6 +3,7 @@ import { AuthContext } from '../providers/AuthProviders';
 import axios from 'axios';
 import { JobTable } from './JobTable';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 export const MyJobs = () => {
   const { user } = useContext(AuthContext);
@@ -57,6 +58,11 @@ export const MyJobs = () => {
     <div>
             <h2 className="text-5xl">Your bookings: {jobs.length}</h2>
             <div className="overflow-x-auto w-full">
+            <Helmet>
+        <title> JOBI | MY JOB</title>
+       
+      </Helmet>
+     
                 <table className="table w-full">
                     {/* head */}
                     <thead>

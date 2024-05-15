@@ -2,6 +2,7 @@ import  { useContext, useState } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 export const AddJobs = () => {
   const {user} =useContext(AuthContext);
@@ -55,6 +56,11 @@ export const AddJobs = () => {
   return (
     <div className="max-w-xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Add A Job</h1>
+      <Helmet>
+        <title> JOBI | ADD JOB</title>
+       
+      </Helmet>
+      
       <form onSubmit={handleSubmit} className="space-y-4">
       <div>
           <label className="block mb-1">Name:</label>
