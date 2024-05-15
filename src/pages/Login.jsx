@@ -22,30 +22,39 @@ export const Login = () => {
     // setloginSuccess=('');
     const HandleGoogleSignIn =()=>{
        signInWithPopup(auth,provider)
-       .then(result =>{
-        Swal.fire({
-            title: "User Successfully loggedin",
-            icon: "success",
-            showClass: {
-              popup: `
-                animate__animated
-                animate__fadeInUp
-                animate__faster
-              `
-            },
-            hideClass: {
-              popup: `
-                animate__animated
-                animate__fadeOutDown
-                animate__faster
-              `
-            }
-          });
-        const user =result.user;
-        setSuccess('user logged in succesfully')
+       .then(result => {
+        const email = result.user.email;
+        console.log(email);
       
-        console.log(user);
-       })
+        const user = { email }
+        console.log(user)
+
+        axios.post('http://localhost:5000/jwt', user, { withCredentials: true })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.success) {
+                    Swal.fire({
+                        title: "User Logged In Successfully",
+                        icon: "success",
+                        showClass: {
+                            popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                      `
+                        },
+                        hideClass: {
+                            popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                      `
+                        }
+                    });
+                    navigate(location?.state ? location.state : '/')
+                }
+            })
+    })
        .catch(error =>{
         console.log('error',error.message)
        })

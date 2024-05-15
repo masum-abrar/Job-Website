@@ -35,11 +35,11 @@ export const AddJobs = () => {
    const email = user?.email;
 
    const newJob ={ email, pictureURL, jobTitle, jobCategory,salaryRange,jobDescription,jobPostingDate,applicationDeadline,jobApplicantsNumber,Name}
-console.log(newJob)
+//console.log(newJob)
    axios.post("http://localhost:5000/jobs", newJob)
    .then(res => {
        const data = res.data;
-       console.log(data);
+       //console.log(data);
        if (data.insertedId){
            Swal.fire({
                title: 'Success',

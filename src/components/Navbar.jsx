@@ -33,7 +33,7 @@ const { user, logOut } = useContext(AuthContext) ;
         
         localStorage.setItem('theme', newTheme);
     };
-  console.log(theme)
+  //console.log(theme)
   const navItem = <>
     <NavLink to='/' className={({isActive})=> isActive? ' text-rose-600  font-bold   ' : 'font-bold'}>
            Home

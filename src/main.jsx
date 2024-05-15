@@ -33,11 +33,12 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
+    errorElement: <Error></Error>,
     children :[
       {
         path : "/",
         element : <Home></Home>,
-      //  loader : () => fetch(`http://localhost:5000/jobs`),
+      //  loader : () => fetch(`https://job-server-site.vercel.app`),
    
       },
       {
@@ -84,7 +85,7 @@ const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <JobDetails></JobDetails>,
-         loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`),
+        loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`),
       
       },
       {
@@ -93,12 +94,7 @@ const router = createBrowserRouter([
         loader: ({params}) => fetch(`http://localhost:5000/jobs/${params.id}`),
       
       
-      },
-      {
-        path : "*",
-        element : <Error></Error>
-   
-      },
+      }
       
     ]
   },

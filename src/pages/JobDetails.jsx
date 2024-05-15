@@ -5,6 +5,7 @@ import pic2 from '../assets/pic2.png';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+
 function getDate() {
     const today = new Date();
     const month = today.getMonth() + 1;
@@ -39,33 +40,88 @@ export const JobDetails = () => {
       } = jobs || {}
     
 
-      const handleapplyjob = () => {
-        console.log(jobs);
-        const email = user?.email
-        const applydata = { jobs, email}
-        console.log(applydata);
-        console.log(applicationDeadline)
-   {currentDate <= applicationDeadline ?   
-        axios.post('http://localhost:5000/applyjob', applydata)
-     .then(res => {
-            const data = res.data;
-            console.log(data);
-            if (data.insertedId){
-                Swal.fire({
-                    title: 'Success',
-                    text: 'Apply Requested Successfully',
-                    icon: 'success',
-                    confirmButtonText: 'Done'
+//       const handleapplyjob = () => {
+//         console.log(jobs.email);
+//         const email = user?.email
+//         const applydata = { jobs, email}
+//         console.log(applydata.email);
+//         console.log(applicationDeadline)
+//    {currentDate <= applicationDeadline ? 
+//     {email !== jobs.email ?  
+//         axios.post('http://localhost:5000/applyjob', applydata)
+//         .then(res => {
+//             const data = res.data;
+//             console.log(data);
+//             if (data.insertedId){
+//                 Swal.fire({
+//                     title: 'Success',
+//                     text: 'Apply Requested Successfully',
+//                     icon: 'success',
+//                     confirmButtonText: 'Done'
+//                 })
+//            }
+//         }).console.error()
+//         : Swal.fire({
+//             title: 'Sorry',
+//             text: 'Application Deadline is over',
+//             icon: 'error',
+//             confirmButtonText: 'Done'
+//         })}.console.error()
+//         : Swal.fire({
+//             title: 'Sorry',
+//             text: 'Application Deadline is over',
+//             icon: 'error',
+//             confirmButtonText: 'Done'
+//         })
+//     }
+const handleapplyjob = () => {
+    console.log(jobs.email);
+    const email = user?.email;
+    const applydata = { jobs, email };
+    console.log(applydata.email);
+    console.log(applicationDeadline);
+    if (currentDate <= applicationDeadline) {
+        if (applydata.email !== jobs.email) {
+            axios.post('http://localhost:5000/applyjob', applydata)
+                .then(res => {
+                    const data = res.data;
+                    console.log(data);
+                    if (data.insertedId) {
+                        Swal.fire({
+                            title: 'Success',
+                            text: 'Apply Requested Successfully',
+                            icon: 'success',
+                            confirmButtonText: 'Done'
+                        });
+                    }
                 })
-           }
-        }).console.error()
-        : Swal.fire({
+                .catch(error => {
+                    console.error(error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'An error occurred while processing your request',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
+                });
+        } else {
+            Swal.fire({
+                title: 'Sorry',
+                text: 'you cannot apply your own added job',
+                icon: 'error',
+                confirmButtonText: 'Done'
+            });
+        }
+    } else {
+        Swal.fire({
             title: 'Sorry',
             text: 'Application Deadline is over',
             icon: 'error',
             confirmButtonText: 'Done'
-        })
+        });
     }
+
+
     //console.log("hi")
     }
 
