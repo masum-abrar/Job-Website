@@ -20,6 +20,11 @@ The Job Website is a comprehensive platform designed to connect job seekers with
 
 * User-Friendly
 
+<strong> * How to Clone and Run a Project Locally </strong>
+* step 1: need to clone that Repository
+* step 2: npm install
+* step 3: Create and edit the .env file as needed.
+* step 4: npm run dev
 
 * user can post for a job
 
