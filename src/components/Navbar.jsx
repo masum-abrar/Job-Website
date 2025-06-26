@@ -3,153 +3,233 @@ import { Link, NavLink } from 'react-router-dom'
 import { AuthContext } from '../providers/AuthProviders';
 import { Tooltip } from 'react-tooltip';
 import { IoPersonOutline } from "react-icons/io5";
+import { FiMoon, FiSun } from 'react-icons/fi';
+import { HiOutlineBriefcase } from 'react-icons/hi';
+import { RiHome4Line, RiArticleLine } from 'react-icons/ri';
 import logo from '../assets/logo.png';
 
-
 export const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [MenuOpenn, setIsMenuOpenn] = useState(false);
 
-const { user, logOut } = useContext(AuthContext) ;
+  const handleLogout = () => {
+    logOut()
+      .then(() => console.log('logOut'))
+      .catch(error => console.error(error))
+  }
 
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme || 'light';
+  });
 
-    const handleLogout = () => {
-        logOut()
-            .then(() => console.log('logOut'))
-            .catch(error => console.error(error))
-    }
-
-    const [theme, setTheme] = useState(() => {
+  useEffect(() => {
+    document.querySelector('html').setAttribute('data-theme', theme);
     
-        const savedTheme = localStorage.getItem('theme');
-        return savedTheme || 'light';
-    });
-
-    useEffect(() => {
-        
-        document.querySelector('html').setAttribute('data-theme', theme);
-    }, [theme]);
-
-    const handleToggle = (e) => {
-        const newTheme = e.target.checked ? 'night' : 'light';
-        setTheme(newTheme);
-        
-        localStorage.setItem('theme', newTheme);
+    const handleScroll = () => {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
     };
-  //console.log(theme)
-  const navItem = <>
-    <NavLink to='/' className={({isActive})=> isActive? ' text-rose-600  font-bold   ' : 'font-bold'}>
-           Home
-            </NavLink>
-              <NavLink to='/alljobs' className={({isActive})=> isActive? ' text-rose-600   font-bold' : 'font-bold'}>
-              All Jobs
-              </NavLink>
-         
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [theme, scrolled]);
 
-            <NavLink to='/blogs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
-             Bolgs
-            </NavLink>
-  </>
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'night' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  const navItem = (to, text, icon) => (
+    <NavLink 
+      to={to} 
+      className={({isActive}) => 
+        `flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${isActive ? 'bg-primary/10 text-primary font-semibold' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`
+      }
+    >
+      {icon}
+      <span>{text}</span>
+    </NavLink>
+  );
+
+  const userNavItem = (to, text, icon) => (
+    user && (
+      <NavLink 
+        to={to} 
+        className={({isActive}) => 
+          `flex items-center gap-2 px-4 py-2 rounded-lg transition-all ${isActive ? 'bg-primary/10 text-primary font-semibold' : 'hover:bg-gray-100 dark:hover:bg-gray-800'}`
+        }
+      >
+        {icon}
+        <span>{text}</span>
+      </NavLink>
+    )
+  );
+
   return (
-    <div className={`navbar  `}>
+    <header className={`fixed w-full z-50 transition-all duration-300 shadow-lg ${scrolled ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm' : 'bg-white dark:bg-gray-900'}`}>
+      <div className={`container mx-auto px-4    ${user ? 'max-w-[1240px]' : 'max-w-[1140px]'} `}>
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
+              <img src={logo} className="h-16 w-16" alt="JOBI Logo" />
+             <span className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-indigo-500 bg-clip-text text-transparent">
+  HireHaven
+</span>
 
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-            </div>
-            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1]  shadow bg-base-100 rounded-box w-52 gap-10 text-black">
-            <NavLink to='/' className={({isActive})=> isActive ? 
-            'border-solid border border-lime-400 rounded  font-bold   ' : 'text-rose-600 font-bold'
-            }>
-           Home
-            </NavLink>
-                <NavLink to='/updateprofile' className={({isActive})=> isActive? 'text-rose-600 font-bold' : 'font-bold'}>
-             Add list
-              </NavLink>
-              <NavLink to='/contact' className={({isActive})=> isActive? 'text-rose-600  font-bold' : 'font-bold'}>
-           Contact Us {user?.email}
-           
-            </NavLink>
-       
-       
-      
-            </ul>
-            <img src={logo} className='h-[70px] w-[70px]'  alt="" />
+            </Link>
           </div>
-        
-          <a className="btn btn-ghost text-xl"> JOBI</a>
-        </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-10 text-black">
-          {navItem}
-           
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-1">
+            {navItem('/', 'Home', <RiHome4Line size={18} />)}
+            {navItem('/alljobs', 'All Jobs', <HiOutlineBriefcase size={18} />)}
+            {navItem('/blogs', 'Blogs', <RiArticleLine size={18} />)}
             
-       {
-          user && <>
-        <NavLink to='/userprofile' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
-             User Profile
-            </NavLink>
-                 <NavLink to='/appliedjobs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
-              Applied Jobs
-            </NavLink>
-            <NavLink to='/addjobs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
-             Add Jobs
-            </NavLink>
-            <NavLink to='/myjobs' className={({isActive})=> isActive? ' text-rose-600 font-bold' : 'font-bold'}>
-             My Jobs
-            </NavLink>
-            </>
-       }
-           
-            {user?.email}
-            <p></p>
-     
-          </ul>
-        </div>
-        <div className="navbar-end">
-        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom ">
-    
-        <div className="w-10 rounded-full " >
-        {
-                        user && <>
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle z-[9999] avatar" data-tooltip-id="my-tooltip" data-tooltip-content={user.displayName} data-tooltip-place="right">
-                                {user.photoURL ? <div className="w-10 rounded-full">
-                                    <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
-                                </div>
-                                    : <div className="rounded-full pt-3 pl-3 w-10"><IoPersonOutline></IoPersonOutline></div>
-                                }
-                            </div>
-                        </>
-                    }
-                    </div>
-        <div>
-          
-          </div>
-         
-      </div>
-    
-       <>
-         
-           {
-          !user ? <>
-         <Link to='/login'>  <a className="btn bg-rose-600 text-white ">Sign In</a></Link>
-         <Link to='/register'> <a className="btn bg-lime-400 text-white">Sign Up</a></Link>
-      </>
-      :
-      
-      <Link to='/login'><a  className="btn bg-rose-600 text-white" onClick={handleLogout}>Logout</a></Link>
-    
-      } 
-      </>
-      <label className="cursor-pointer grid place-items-center ml-4">
-  <input onChange={handleToggle} type="checkbox" value="synthwave" className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"/>
-  <svg className="col-start-1 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
-  <svg className="col-start-2 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-</label>
-    
-        </div>
-    
+            {/* User-specific links */}
+            {userNavItem('/userprofile', 'Profile', <IoPersonOutline size={18} />)}
+            {userNavItem('/appliedjobs', 'Applications', <HiOutlineBriefcase size={18} />)}
+            {userNavItem('/addjobs', 'Post Job', <HiOutlineBriefcase size={18} />)}
+            {userNavItem('/myjobs', 'My Jobs', <HiOutlineBriefcase size={18} />)}
+          </nav>
 
-        <Tooltip id="my-tooltip" />
+          {/* Right Side */}
+          <div className="flex items-center gap-4">
+            {/* Theme Toggle */}
+           
+
+            {/* User Avatar */}
+            {user && (
+              <div className="relative">
+                <button 
+                  className="flex items-center gap-2 focus:outline-none"
+                  onClick={() => setIsMenuOpenn(!MenuOpenn)}
+                >
+                  {user.photoURL ? (
+                    <img 
+                      src={user.photoURL} 
+                      alt={user.displayName} 
+                      className="w-8 h-8 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                      <IoPersonOutline size={18} />
+                    </div>
+                  )}
+                </button>
+
+                {/* Dropdown Menu */}
+                {MenuOpenn && (
+                  <div className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-lg shadow-lg py-2 z-50 border border-gray-100 dark:border-gray-700">
+                    <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
+                      <p className="text-sm font-medium">{user.displayName || 'User'}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{user.email}</p>
+                    </div>
+                    <Link 
+                      to="/userprofile" 
+                      className="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    <button 
+                      onClick={() => {
+                        handleLogout();
+                        setIsMenuOpen(false);
+                      }}
+                      className="w-full text-left px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 text-red-500"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Auth Buttons */}
+            {!user ? (
+              <div className="hidden md:flex items-center gap-2">
+                <Link to="/login" className="px-4 py-2 rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                  Sign In
+                </Link>
+                <Link to="/register" className="px-4 py-2 bg-gradient-to-r from-sky-400 to-indigo-500 text-white rounded-lg font-medium hover:opacity-90 transition-opacity">
+                  Sign Up
+                </Link>
+              </div>
+            ) : (
+              <button 
+                onClick={handleLogout}
+                className="hidden md:block px-4 py-2 bg-gradient-to-r from-sky-400 to-indigo-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors"
+              >
+                Logout
+              </button>
+            )}
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden pb-4 pt-2">
+            <div className="flex flex-col gap-1">
+              {navItem('/', 'Home', <RiHome4Line size={18} />)}
+              {navItem('/alljobs', 'All Jobs', <HiOutlineBriefcase size={18} />)}
+              {navItem('/blogs', 'Blogs', <RiArticleLine size={18} />)}
+              
+              {/* User-specific links */}
+              {userNavItem('/userprofile', 'Profile', <IoPersonOutline size={18} />)}
+              {userNavItem('/appliedjobs', 'Applications', <HiOutlineBriefcase size={18} />)}
+              {navItem('/addjobs', 'Post Job', <HiOutlineBriefcase size={18} />)}
+              {navItem('/myjobs', 'My Jobs', <HiOutlineBriefcase size={18} />)}
+
+              {/* Auth Buttons */}
+              {!user ? (
+                <div className="flex flex-col gap-2 mt-2">
+                  <Link 
+                    to="/login" 
+                    className="px-4 py-2 text-center rounded-lg font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign In
+                  </Link>
+                  <Link 
+                    to="/register" 
+                    className="px-4 py-2 bg-gradient-to-r from-sky-400 to-indigo-500 text-white text-center rounded-lg font-medium hover:opacity-90 transition-opacity"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              ) : (
+                <button 
+                  onClick={() => {
+                    handleLogout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="px-4 py-2 bg-red-500 text-white rounded-lg font-medium hover:bg-red-600 transition-colors mt-2"
+                >
+                  Logout
+                </button>
+              )}
+            </div>
+          </div>
+        )}
       </div>
-      )
+    </header>
+  )
 }

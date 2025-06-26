@@ -1,152 +1,118 @@
-import  { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../providers/AuthProviders';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
 
 export const AddJobs = () => {
-  const {user} =useContext(AuthContext);
-  // const [formData, setFormData] = useState({
-  //   pictureURL: '',
-  //   jobTitle: '',
-  //   jobCategory: '',
-  //   salaryRange: '',
-  //   jobDescription: '',
-  //   jobPostingDate: '',
-  //   applicationDeadline: '',
-  //   jobApplicantsNumber: 0,
-  // });
-
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
+  const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const Name=form.name.value;
-   const pictureURL=form.pictureURL.value;
-   const jobTitle=form.jobTitle.value;
-   const jobCategory=form.jobCategory.value;
-   const salaryRange=form.salaryRange.value; 
-   const jobDescription=form.jobDescription.value; 
-   const jobPostingDate=form.jobPostingDate.value; 
-   const applicationDeadline=form.applicationDeadline.value;
-   const jobApplicantsNumber=form.jobApplicantsNumber.value;
-   const email = user?.email;
+    const Name = form.name.value;
+    const pictureURL = form.pictureURL.value;
+    const jobTitle = form.jobTitle.value;
+    const jobCategory = form.jobCategory.value;
+    const salaryRange = form.salaryRange.value;
+    const jobDescription = form.jobDescription.value;
+    const jobPostingDate = form.jobPostingDate.value;
+    const applicationDeadline = form.applicationDeadline.value;
+    const jobApplicantsNumber = form.jobApplicantsNumber.value;
+    const email = user?.email;
 
-   const newJob ={ email, pictureURL, jobTitle, jobCategory,salaryRange,jobDescription,jobPostingDate,applicationDeadline,jobApplicantsNumber,Name}
-//console.log(newJob)
-   axios.post("http://localhost:5000/jobs", newJob)
-   .then(res => {
-       const data = res.data;
-       //console.log(data);
-       if (data.insertedId){
-           Swal.fire({
-               title: 'Success',
-               text: 'New Job Added Successfully',
-               icon: 'success',
-               confirmButtonText: 'Done'
-           })
-       }
-   })
-  
+    const newJob = {
+      email,
+      pictureURL,
+      jobTitle,
+      jobCategory,
+      salaryRange,
+      jobDescription,
+      jobPostingDate,
+      applicationDeadline,
+      jobApplicantsNumber,
+      Name,
+    };
+
+    axios.post('https://job-server-site.vercel.app/jobs', newJob).then((res) => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: 'Success',
+          text: 'New Job Added Successfully',
+          icon: 'success',
+          confirmButtonText: 'Done',
+        });
+        form.reset();
+      }
+    });
   };
 
   return (
-    <div className="max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Add A Job</h1>
+    <div className="min-h-screen bg-gray-50 py-16 px-4">
       <Helmet>
-        <title> JOBI | ADD JOB</title>
-       
+        <title>JOBI | Add Job</title>
       </Helmet>
-      
-      <form onSubmit={handleSubmit} className="space-y-4">
-      <div>
-          <label className="block mb-1">Name:</label>
-          <input
-            type="text"
-            name="name"
-          
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
+
+    <div className='mt-12'>
+        <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-200 p-10 mt-14"
+      >
+        <div className="text-center mb-10 ">
+          <h2 className="text-4xl font-bold text-gray-900">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-indigo-600">
+              Post a New Job
+            </span>
+          </h2>
+          <p className="text-gray-500 mt-2">Fill in the details below to publish a job listing</p>
+          <div className="h-1 w-20 bg-gradient-to-r from-sky-400 to-indigo-500 mx-auto rounded-full mt-4" />
         </div>
-        <div>
-          <label className="block mb-1">Picture URL of the Job Banner:</label>
-          <input
-            type="text"
-            name="pictureURL"
-          
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Job Title:</label>
-          <input
-            type="text"
-            name="jobTitle"
-           
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Job Category:</label>
-          <input
-            type="text"
-            name="jobCategory"
-          
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Salary Range:</label>
-          <input
-            type="text"
-            name="salaryRange"
-            
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Job Description:</label>
-          <textarea
-            name="jobDescription"
-         
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          ></textarea>
-        </div>
-        <div>
-          <label className="block mb-1">Job Posting Date:</label>
-          <input
-            type="date"
-            name="jobPostingDate"
-           
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Application Deadline:</label>
-          <input
-            type="date"
-            name="applicationDeadline"
-         
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-        <div>
-          <label className="block mb-1">Job Applicant Number:</label>
-          <input
-            type="text"
-            name="jobApplicantsNumber"
-         defaultValue="0"
-            className="w-full border border-gray-300 rounded px-4 py-2"
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-          Submit
-        </button>
-      </form>
+
+        <form onSubmit={handleSubmit} className="space-y-6 text-sm text-gray-800">
+          {/* Input Fields */}
+          {[
+            { label: 'Your Name', name: 'name', type: 'text' },
+            { label: 'Job Banner Image URL', name: 'pictureURL', type: 'text' },
+            { label: 'Job Title', name: 'jobTitle', type: 'text' },
+            { label: 'Job Category', name: 'jobCategory', type: 'text' },
+            { label: 'Salary Range', name: 'salaryRange', type: 'text' },
+            { label: 'Posting Date', name: 'jobPostingDate', type: 'date' },
+            { label: 'Application Deadline', name: 'applicationDeadline', type: 'date' },
+            { label: 'Number of Applicants', name: 'jobApplicantsNumber', type: 'number', defaultValue: 0 },
+          ].map((field, i) => (
+            <div key={i}>
+              <label className="block font-medium mb-1">{field.label}</label>
+              <input
+                type={field.type}
+                name={field.name}
+                defaultValue={field.defaultValue}
+                className="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+              />
+            </div>
+          ))}
+
+          {/* Job Description */}
+          <div>
+            <label className="block font-medium mb-1">Job Description</label>
+            <textarea
+              name="jobDescription"
+              rows="4"
+              className="w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-3 mt-4 text-white font-semibold rounded-lg bg-gradient-to-r from-sky-500 to-indigo-600 hover:from-sky-600 hover:to-indigo-700 transition-all duration-300 shadow-md"
+          >
+            Submit Job
+          </button>
+        </form>
+      </motion.div>
+    </div>
     </div>
   );
 };
-

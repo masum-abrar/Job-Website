@@ -11,37 +11,62 @@ img{
     background: radial-gradient(780px at 37.8% 100.3%, rgb(19, 55, 115) 2.2%, rgb(32, 7, 80) 20.2%, rgb(27, 88, 111) 58.6%, rgb(115, 88, 44) 75%, rgb(99, 19, 90) 89.6%, rgb(12, 51, 76) 96.1%);
 } */
 
-.rec{
-    background-image: url(../assets/pic.jpg);
-    background-size: cover; /* Cover the entire background */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Do not repeat the background image */
-  background-color: black;
-
+.rec {
+  background-image: url(../assets/pic.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .rec::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(4, 3, 3, 0.5); /* Adjust opacity as needed */
-  }
-  .rec2{
-    background-image: url(../assets/pic5.jpg);
-    background-size: cover; /* Cover the entire background */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Do not repeat the background image */
-    background-color: black;
-  }
-  .rec2::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(55, 245, 96, 0.852); /* Adjust opacity as needed */
-  }
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+.rec:hover::before {
+  opacity: 0.8;
+}
+
+.rec2 {
+  background-image: url(../assets/pic5.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.rec2::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(55, 245, 96, 0.4) 0%, rgba(55, 245, 96, 0.2) 100%);
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+.rec2:hover::before {
+  opacity: 0.8;
+}
+
+/* Modern button styling */
+.btn-hover-effect {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hover-effect:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.15);
+}
+
